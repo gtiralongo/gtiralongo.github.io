@@ -518,9 +518,37 @@
                 </div>
 
                 <div class="row" data-aos="fade-in">
-
-                    <!-- <div class="col-lg-5 d-flex align-items-stretch" > -->
+                    
                     <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <form action="forms/contact.php" method="post" role="form">
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="name">Your Name</label>
+                  <input type="text" name="name" class="form-control" id="name" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Your Email</label>
+                  <input type="email" class="form-control" name="email" id="email" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">Subject</label>
+                <input type="text" class="form-control" name="subject" id="subject" required>
+              </div>
+              <div class="form-group">
+                <label for="name">Message</label>
+                <textarea class="form-control" name="message" rows="10" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+                    <div class="col-lg-5 d-flex align-items-stretch" >
+<!--                     <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch"> -->
                         <div class="info">
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
@@ -590,6 +618,25 @@
         gtag('js', new Date());
 
         gtag('config', 'G-BKBGS7ESHN');
+        
+        document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Evitar el envío del formulario
+      
+      // Obtener los valores de los campos
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var subject = document.getElementById("subject").value;
+      var message = document.getElementById("message").value;
+      
+      // Construir la URL de prellenado
+      var formId = "Form_ID"; // Reemplaza con el ID del formulario de Google
+      var baseURL = "https://docs.google.com/forms/d/e/" + formId + "/formResponse";
+      var params = "?entry.1234567890=" + encodeURIComponent(name) + "&entry.0987654321=" + encodeURIComponent(email) + "&entry.9876543210=" + encodeURIComponent(subject) + "&entry.5678901234=" + encodeURIComponent(message);
+      var url = baseURL + params;
+      
+      // Redirigir a la URL de prellenado
+      window.location.href = url;
+    });
     </script>
 
 </body>
