@@ -654,44 +654,46 @@
       window.location.href = url;
     });
   </script> -->
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'G-BKBGS7ESHN');
+    gtag('config', 'G-BKBGS7ESHN');
+    
+    document.getElementById("gtForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evitar el envío del formulario
 
-  document.getElementById("gtForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent default form submission
+        // Obtener los valores de los campos
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var subject = document.getElementById("subject").value;
+        var message = document.getElementById("message").value;
 
-    // Get form field values
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var subject = document.getElementById("subject").value;
-    var message = document.getElementById("message").value;
+        // Construir la URL de prellenado
+        var formId = "1FAIpQLSe-DkocOvyjouY18-cjocbbGQHPZ13GukMNmAJPVL4YYhTE5Q"; 
+        var baseURL = "https://docs.google.com/forms/d/e/" + formId + "/formResponse";
+        var params = new URLSearchParams();
+        params.append("entry.596580552", name);
+        params.append("entry.1052550129", email);
+        params.append("entry.1099202513", subject);
+        params.append("entry.1586671367", message);
 
-    // Construct the prefilled form URL
-    var formId = "1FAIpQLSe-DkocOvyjouY18-cjocbbGQHPZ13GukMNmAJPVL4YYhTE5Q";
-    var baseURL = "https://docs.google.com/forms/d/e/" + formId + "/formResponse";
-    var params = "?entry.596580552=" + encodeURIComponent(name) + "&entry.1052550129=" + encodeURIComponent(email) + "&entry.1099202513=" + encodeURIComponent(subject) + "&entry.1586671367=" + encodeURIComponent(message);
-    var url = baseURL + params;
-
-    // Send data using Fetch API (or alternative methods)
-    fetch(url, {
-      method: 'POST', // Set method to POST for sending data
-    })
-    .then(response => {
-      console.log(response.ok)
-      if (response.ok) {
-        // Success message (replace with your desired message)
-        document.getElementById("gtForm").innerHTML = "Mensaje enviado!"; // Update form content with success message
-      } else {
-        console.error("Error sending data:", response);
-        // Handle errors (optional: display error message to user)
-      }
+        // Enviar la solicitud usando fetch en lugar de redirigir
+        fetch(baseURL, {
+            method: 'POST',
+            body: params,
+            mode: 'no-cors' // Evitar problemas de CORS con Google Forms
+        }).then(function(response) {
+            // Mostrar mensaje en la página después de enviar el formulario
+            document.getElementById("gtForm").innerHTML = "<p>El formulario fue enviado con éxito.</p>";
+        }).catch(function(error) {
+            console.error('Error al enviar el formulario:', error);
+            document.getElementById("gtForm").innerHTML = "<p>Ocurrió un error al enviar el formulario.</p>";
+        });
     });
-  });
 </script>
+
 </body>
 
 </html>
