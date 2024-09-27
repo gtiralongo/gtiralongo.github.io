@@ -686,10 +686,10 @@
             mode: 'no-cors' // Evitar problemas de CORS con Google Forms
         }).then(function(response) {
             // Mostrar mensaje en la página después de enviar el formulario
-            document.getElementById("gtForm").innerHTML = "<p>El formulario fue enviado con éxito.</p>";
+            document.getElementById("gtForm").innerHTML = "<h4>El formulario fue enviado con éxito.</h4>";
         }).catch(function(error) {
             console.error('Error al enviar el formulario:', error);
-            document.getElementById("gtForm").innerHTML = "<p>Ocurrió un error al enviar el formulario.</p>";
+            document.getElementById("gtForm").innerHTML = "<h4>Ocurrió un error al enviar el formulario.</h4>";
         });
     });
 </script>
