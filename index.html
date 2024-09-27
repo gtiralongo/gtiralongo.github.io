@@ -681,6 +681,7 @@
       method: 'POST', // Set method to POST for sending data
     })
     .then(response => {
+      console.log(response.ok)
       if (response.ok) {
         // Success message (replace with your desired message)
         document.getElementById("gtForm").innerHTML = "Mensaje enviado!"; // Update form content with success message
